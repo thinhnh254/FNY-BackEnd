@@ -4,9 +4,6 @@ import CRUDservice from "../services/CRUDservice";
 let getHomePage = async (req, res) => {
   try {
     let data = await db.User.findAll();
-    console.log("----------------");
-    console.log(data);
-    console.log("----------------");
     return res.render("homepage.ejs", {
       data: JSON.stringify(data),
     });
@@ -31,9 +28,6 @@ let postCRUD = async (req, res) => {
 
 let displayGetCRUD = async (req, res) => {
   let data = await CRUDservice.getAllUser();
-  console.log("===========================");
-  console.log(data);
-  console.log("===========================");
   return res.render("displayCRUD.ejs", {
     dataTable: data,
   });
@@ -63,6 +57,16 @@ let putCRUD = async (req, res) => {
   });
 };
 
+let deleteCRUD = async (req, res) => {
+  let id = req.query.id;
+  if (id) {
+    await CRUDservice.deleteUserById(id);
+    return res.redirect("/get-crud");
+  } else {
+    return res.send("User not found!");
+  }
+};
+
 module.exports = {
   getHomePage: getHomePage,
   getAboutPage: getAboutPage,
@@ -71,4 +75,5 @@ module.exports = {
   displayGetCRUD: displayGetCRUD,
   getEditCRUD: getEditCRUD,
   putCRUD: putCRUD,
+  deleteCRUD: deleteCRUD,
 };
