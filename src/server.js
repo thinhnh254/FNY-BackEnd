@@ -1,12 +1,14 @@
 import bodyParser from "body-parser";
+import cors from "cors";
 import express from "express";
 import connectDB from "./config/connectDB";
 import viewEngine from "./config/viewEngine";
 import initWebRoutes from "./route/web";
+
 require("dotenv").config();
 
 let app = express();
-
+app.use(cors({ credentials: true, origin: true }));
 // config app
 
 app.use(bodyParser.json());
