@@ -25,7 +25,7 @@ let initWebRoutes = (app) => {
 
   router.post("/api/login", userController.handleLogin);
 
-  router.get("/api/get-all-user", userController.handleGetAllUsers);
+  router.get("/api/get-all-users", userController.handleGetAllUsers);
 
   return app.use("/", router);
 };
